@@ -1,3 +1,5 @@
+// screens/contribute/section.dart
+
 import 'package:flutter/material.dart';
 
 class TextSection extends StatelessWidget {
