@@ -1,48 +1,39 @@
-// screens/Resources/Resources.dart
-
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Resources extends StatefulWidget {
-  Resources({Key key}) : super(key: key);
+  Resources({this.color, this.title, this.onPush});
 
-  @override
+  final MaterialColor color;
+  final String title;
+  final ValueChanged<int> onPush;
+
   ResourcesState createState() => ResourcesState();
 }
 
 class ResourcesState extends State<Resources> {
-  int selectedIndex = 0;
-  final widgetOptions = [
-    Text('Resources'),
-    Text('Contribute'),
-    Text('Help Chat'),
-  ];
-
+  GoogleMapController mapController;
+  
+  final LatLng _center = const LatLng(45.521563, -122.677433);
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Covid Resources'),
+          title: Text(
+            "Resources",
+          ),
+          backgroundColor: widget.color,
         ),
-        body: Center(
-          child: widgetOptions.elementAt(selectedIndex),
-        ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.fastfood), title: Text('Resources')),
-          BottomNavigationBarItem(icon: Icon(Icons.event_note), title: Text('Contribute')),
-          BottomNavigationBarItem(icon: Icon(Icons.chat), title: Text('Help Chat')),
-        ],
-        currentIndex: selectedIndex,
-        fixedColor: Colors.deepPurple,
-        onTap: onItemTapped,
-      ),
-    );
-  }
-
-  void onItemTapped(int index){
-    setState(() {
-      selectedIndex = index;
-    });
+        body: GoogleMap(
+          onMapCreated: _onMapCreated,
+          initialCameraPosition: CameraPosition(
+            target: _center,
+            zoom: 11.0,
+          ),
+        ));
   }
 }
