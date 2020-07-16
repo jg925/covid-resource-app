@@ -1,23 +1,41 @@
-// screens/contribute/contribute.dart
-
 import 'package:flutter/material.dart';
-import 'section.dart';
 
 class Contribute extends StatelessWidget {
+  Contribute({this.color, this.title, this.onPush});
+  final MaterialColor color;
+  final String title;
+  final ValueChanged<int> onPush;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Ways You Can Help'),
-      ),
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextSection(Colors.red),
-            TextSection(Colors.green),
-            TextSection(Colors.blue),
-          ]),
-    );
+        appBar: AppBar(
+          title: Text(
+            "Contribute Page",
+          ),
+          backgroundColor: color,
+        ),
+        body: Container(
+          color: Colors.white,
+          child: _buildList(),
+        ));
+  }
+
+  final List<int> materialIndices = [900, 800, 700, 600, 500, 400, 300, 200, 100, 50];
+
+  Widget _buildList() {
+    return ListView.builder(
+        itemCount: materialIndices.length,
+        itemBuilder: (BuildContext content, int index) {
+          int materialIndex = materialIndices[index];
+          return Container(
+            color: color[materialIndex],
+            child: ListTile(
+              title: Text('$materialIndex', style: TextStyle(fontSize: 24.0)),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () => onPush(materialIndex),
+            ),
+          );
+        });
   }
 }
