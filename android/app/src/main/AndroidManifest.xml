@@ -9,6 +9,12 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="covid_resource_app_master"
         android:icon="@mipmap/ic_launcher">
+
+        <!-- Google Maps API key -->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCbvNlYS86gc31TdUId5F5K-tBQoQn6yjM"/>
+
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
