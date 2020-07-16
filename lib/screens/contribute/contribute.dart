@@ -1,3 +1,5 @@
+// screens/contribute/contribute.dart
+
 import 'package:flutter/material.dart';
 
 class Contribute extends StatelessWidget {
