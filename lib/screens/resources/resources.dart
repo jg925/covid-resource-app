@@ -1,4 +1,4 @@
-// screens/Resources/Resources.dart
+// screens/resources/resources.dart
 
 import 'package:flutter/material.dart';
 
