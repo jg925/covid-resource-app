@@ -1,6 +1,6 @@
 # covid_resource_app_master
 
-A new Flutter application.
+A Flutter application for helping people find Covid-19 resources and contributing to the database of resources.
 
 ## Getting Started
 
