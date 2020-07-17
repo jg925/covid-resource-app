@@ -11,7 +11,7 @@ class Description extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: MainAxisSize.max,
         children: [
           Container(
             //padding: const EdgeInsets.fromLTRB(_hPad, 32.0, _hPad, 4.0),
@@ -25,16 +25,3 @@ class Description extends StatelessWidget {
     );
   }
 }
-/*mainAxisAlignment: MainAxisAlignment.spaceAround,
-Column(
-crossAxisAlignment: CrossAxisAlignment.start,
-children: [
-Container(
-//padding: const EdgeInsets.fromLTRB(_hPad, 32.0, _hPad, 4.0),
-child: Text(_title),
-),
-Container(
-//padding: const EdgeInsets.fromLTRB(_hPad, 10.0, _hPad, _hPad),
-child: Text(_body),
-),
-]),*/

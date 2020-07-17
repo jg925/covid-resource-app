@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'description.dart';
+import 'disp_image.dart';
 
 class Section extends StatelessWidget {
   final String _title;
@@ -19,7 +20,7 @@ class Section extends StatelessWidget {
             child: Description(_title, _body),
           ),
           Container(
-            child: Text("Hi"), //Image.asset("assets/images/restaurant.jpg"),
+            child: DispImage('assets/images/restaurant.png'),
           ),
         ],
       ),

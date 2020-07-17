@@ -20,8 +20,9 @@ class Contribute extends StatelessWidget {
         ),
         body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
+
             children: [
               Section("Add a Resource to this App","Description"),
               Section("Volunteer in Your Community","Description"),
