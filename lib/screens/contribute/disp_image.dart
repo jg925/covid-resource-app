@@ -10,7 +10,7 @@ class DispImage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints.expand(height: 100, width: 100),
+      constraints: BoxConstraints.expand(height: 90, width: 128),
       decoration: BoxDecoration(color: Colors.grey),
       child: Image.asset(
         _assetPath,

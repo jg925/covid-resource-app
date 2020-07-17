@@ -24,9 +24,9 @@ class Contribute extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
 
             children: [
-              Section("Add a Resource to this App","Description"),
-              Section("Volunteer in Your Community","Description"),
-              Section("Inspirations","One liner"),
+              Section("Add a Resource to this App","Description",'assets/images/restaurant.png'),
+              Section("Volunteer in Your Community","Description",''),
+              Section("Inspirations","One liner",''),
             ]),
     );
   }

@@ -7,9 +7,10 @@ import 'disp_image.dart';
 class Section extends StatelessWidget {
   final String _title;
   final String _body;
+  final String _assetPath;
 
   //static const double _hPad = 16.0;
-  Section(this._title, this._body);
+  Section(this._title, this._body, this._assetPath);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class Section extends StatelessWidget {
             child: Description(_title, _body),
           ),
           Container(
-            child: DispImage('assets/images/restaurant.png'),
+            child: DispImage(_assetPath),
           ),
         ],
       ),
