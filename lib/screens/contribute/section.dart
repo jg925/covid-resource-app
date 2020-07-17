@@ -1,29 +1,28 @@
 // screens/contribute/section.dart
 
 import 'package:flutter/material.dart';
+import 'description.dart';
 
 class Section extends StatelessWidget {
   final String _title;
   final String _body;
-  static const double _hPad = 16.0;
 
+  //static const double _hPad = 16.0;
   Section(this._title, this._body);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Container(
-          padding: const EdgeInsets.fromLTRB(_hPad, 32.0, _hPad, 4.0),
-          child: Text(_title),
-        ),
-        Container(
-          padding: const EdgeInsets.fromLTRB(_hPad, 10.0, _hPad, _hPad),
-          child: Text(_body),
-        ),
-      ]
+    return Container(
+      child: Row(
+        children: <Widget>[
+          Container(
+            child: Description(_title, _body),
+          ),
+          Container(
+            child: Text("Hi"), //Image.asset("assets/images/restaurant.jpg"),
+          ),
+        ],
+      ),
     );
   }
 }
