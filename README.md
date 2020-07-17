@@ -2,6 +2,11 @@
 
 A new Flutter application.
 
+## Running this app
+
+`flutter run` 
+asdfasdf
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
