@@ -16,6 +16,7 @@ class Section extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Container(
             child: Description(_title, _body),
