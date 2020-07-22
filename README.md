@@ -1,8 +1,8 @@
-# covid_resource_app_master
+# covid_resource_app_master:
 
 A Flutter application for helping people find Covid-19 resources and contributing to the database of resources in North Carolina.
 
-## Getting Started
+## Getting Started:
 
 This project is a starting point for a Flutter application.
 
