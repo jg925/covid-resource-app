@@ -1,4 +1,4 @@
-// screens/HomePage/HomePage.dart
+// screens/home/home.dart
 
 import 'package:covid_resource_app_master/components/bottom_navigation_menu/bottom_navigation.dart';
 import 'package:covid_resource_app_master/components/bottom_navigation_menu/tab_navigator.dart';

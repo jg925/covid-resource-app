@@ -1,3 +1,5 @@
+// screens/resources/color_detail_page.dart
+
 import 'package:flutter/material.dart';
 
 class ColorDetailPage extends StatelessWidget {
