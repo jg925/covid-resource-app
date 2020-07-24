@@ -1,6 +1,7 @@
 // screens/contribute/description.dart
 
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'form.dart';
 
 class Description extends StatelessWidget {
@@ -26,8 +27,10 @@ class Description extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => CovidForm()),
+              PageTransition(
+                type: PageTransitionType.rightToLeft,
+                child:
+                  CovidForm()),
             );
           },
           child: Text('Getting Started \u2192'),
