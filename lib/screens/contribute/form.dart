@@ -10,12 +10,7 @@ class CovidForm extends StatefulWidget {
   }
 }
 
-/*class _FormData {
-  String username = '';
-}*/
-
 class _CovidFormState extends State<CovidForm> {
-  //final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
