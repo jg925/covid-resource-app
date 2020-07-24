@@ -1,12 +1,13 @@
 // screens/resources/resources.dart
 
-import 'package:covid_resource_app_master/screens/resources/resources_dropdown_options.dart';
-import 'package:covid_resource_app_master/screens/resources/suggestion_list_item.dart';
+import 'package:covid_resource_app_master/screens/resources/dropdown_resources.dart';
+import 'package:covid_resource_app_master/screens/resources/text_fav_history.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../components/expandable_bottom_sheet/expandable_bottom_sheet.dart';
+import 'listview_resources_list.dart';
 
 class Resources extends StatefulWidget {
   Resources({this.color, this.title, this.onPush});
@@ -30,8 +31,8 @@ class ResourcesState extends State<Resources> {
     mapController = controller;
   }
 
-  List<DropdownMenuItem<ResourcesListItem>> _resourcesDropdownMenuItems;
-  ResourcesListItem _selectedItem;
+  List<DropdownMenuItem<DropdownResources>> _resourcesDropdownMenuItems;
+  DropdownResources _selectedItem;
   Column _bottomSheetContent;
   
 
@@ -48,31 +49,30 @@ class ResourcesState extends State<Resources> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Spacer(flex: 3,),
-          DropdownButton<ResourcesListItem>(
-            value: _selectedItem,
-            items: _resourcesDropdownMenuItems,
-            hint: Text("Select a category"),
-            onChanged: (value) {
-              setState(() {
-                _selectedItem = value;
-                bottomSheetSize = 500;
-                bottomSheetMinSize = 250;
-                _bottomSheetContent = getUpdatedBottomSheetContent(value);
-            });
-          }),
+          DropdownButton<DropdownResources>(
+              value: _selectedItem,
+              items: _resourcesDropdownMenuItems,
+              hint: Text("Select a category"),
+              onChanged: (value) {
+                setState(() {
+                  _selectedItem = value;
+                  bottomSheetSize = 500;
+                  bottomSheetMinSize = 250;
+                  _bottomSheetContent = getUpdatedBottomSheetContent(value);
+                });
+              }),
           Spacer(flex: 2,),
-          SuggestionListItem(Icon(Icons.star_border), "Choose a saved place"),
+          TextFavHistory(Icon(Icons.star_border), "Choose a saved place"),
           Spacer(flex: 1,),
           Divider(indent: 70, endIndent: 70, thickness: 1,),
           Spacer(flex: 1,),
-          SuggestionListItem(Icon(Icons.history), "Choose from recents"),
+          TextFavHistory(Icon(Icons.history), "Choose from recents"),
           Spacer(flex: 3,),
         ]
     );
   }
 
-  final List<String> entries = <String>['A', 'B', 'C', 'A', 'B', 'C', 'A', 'B', 'C', 'A', 'B', 'C', 'A', 'B', 'C'];
-  final List<int> colorCodes = <int>[600, 500, 100, 600, 500, 100, 600, 500, 100, 600, 500, 100, 600, 500, 100];
+
 
 
 
@@ -83,7 +83,7 @@ class ResourcesState extends State<Resources> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           SizedBox(height: 20,),
-          DropdownButton<ResourcesListItem>(
+          DropdownButton<DropdownResources>(
               value: _selectedItem,
               items: _resourcesDropdownMenuItems,
               hint: Text("Select a category"),
@@ -95,18 +95,7 @@ class ResourcesState extends State<Resources> {
               }),
         SizedBox(height: 20,),
         Expanded(
-          child: ListView.separated(
-            padding: const EdgeInsets.all(8),
-            itemCount: entries.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                height: 50,
-                color: Colors.amber[colorCodes[index]],
-                child: Center(child: Text('Entry ${entries[index]}')),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) => const Divider(),
-          )
+          child: ListviewResourcesList(_selectedItem.value),
         ),
 
         ]

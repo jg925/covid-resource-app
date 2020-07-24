@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class SuggestionListItem extends StatefulWidget {
+class TextFavHistory extends StatefulWidget {
   final String text;
   final Icon icon;
-  SuggestionListItem(this.icon, this.text);
+  TextFavHistory(this.icon, this.text);
 
 
   @override
-  SuggestionListItemState createState() => SuggestionListItemState();
+  TextFavHistoryState createState() => TextFavHistoryState();
 
 }
 
-class SuggestionListItemState extends State<SuggestionListItem> {
+class TextFavHistoryState extends State<TextFavHistory> {
 
 
   Widget build(BuildContext context) {
