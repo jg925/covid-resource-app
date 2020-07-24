@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 
-enum TabItem { resources, contribute, help }
+enum TabItem { resources, contribute, help, profile }
 
 Map<TabItem, String> tabName = {
   TabItem.resources: 'Resources',
   TabItem.contribute: 'Contribute',
   TabItem.help: 'Help Chat',
+  TabItem.profile: 'Profile Page',
 };
 
 Map<TabItem, MaterialColor> activeTabColor = {
   TabItem.resources: Colors.red,
   TabItem.contribute: Colors.green,
   TabItem.help: Colors.blue,
+  TabItem.profile: Colors.purple,
 };
 
 Map<TabItem, IconData> tabIcon = {
   TabItem.resources: Icons.search,
   TabItem.contribute: Icons.event,
   TabItem.help: Icons.chat_bubble,
+  TabItem.profile: Icons.person,
 };
 
 
@@ -35,6 +38,7 @@ class BottomNavigation extends StatelessWidget {
         _buildItem(tabItem: TabItem.resources),
         _buildItem(tabItem: TabItem.contribute),
         _buildItem(tabItem: TabItem.help),
+        _buildItem(tabItem: TabItem.profile),
       ],
       onTap: (index) => onSelectTab(
         TabItem.values[index],

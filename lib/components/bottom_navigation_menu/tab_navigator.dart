@@ -2,6 +2,7 @@ import 'package:covid_resource_app_master/screens/contribute/contribute.dart';
 import 'package:covid_resource_app_master/screens/help/help.dart';
 import 'package:covid_resource_app_master/screens/resources/color_detail_page.dart';
 import 'package:covid_resource_app_master/screens/resources/resources.dart';
+import 'package:covid_resource_app_master/screens/profile/profile.dart';
 import 'package:flutter/material.dart';
 
 import 'bottom_navigation.dart';
@@ -78,7 +79,24 @@ class TabNavigator extends StatelessWidget {
         };
       }
       break;
+      case TabItem.profile: {
+        return {
+          TabNavigatorRoutes.root: (context) => Profile(
+            color: activeTabColor[tabItem],
+            title: tabName[tabItem],
+            onPush: (materialIndex) =>
+                _push(context, materialIndex: materialIndex),
+          ),
+          TabNavigatorRoutes.detail: (context) => ColorDetailPage(
+            color: activeTabColor[tabItem],
+            title: tabName[tabItem],
+            materialIndex: materialIndex,
+          ),
+        };
+      }
+      break;
     }
+
 
   }
 
