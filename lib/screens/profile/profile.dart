@@ -18,7 +18,7 @@ class Profile extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.blueAccent,Colors.indigoAccent],
+                colors: [Colors.deepPurpleAccent,Colors.indigoAccent],
               )
             ),
             child:Container(
@@ -30,9 +30,9 @@ class Profile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     CircleAvatar(
-                      backgroundImage: NetworkImage("Katherine-Johnson.jpg"
-                    ),
-                    radius:50.0,
+                      backgroundImage: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT20qVa_TWylIuPI17x7iMU6zTa5Mq9IrcwqQ&usqp=CAU"
+                      ),
+                      radius:50.0,
                     ),
                     SizedBox(
                       height: 10.0,
@@ -41,7 +41,7 @@ class Profile extends StatelessWidget {
                       "Katherine Johnson",
                       style: TextStyle(
                         fontSize: 22.0,
-                        color: Colors.blue
+                        color: Colors.white
                       ),
                     ),
                   ],
