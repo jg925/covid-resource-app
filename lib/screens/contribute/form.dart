@@ -26,6 +26,10 @@ class _CovidFormState extends State<CovidForm> {
     return null;
   }
 
+  String _validPhoneNumber(String value) {
+
+  }
+
   void submit() {
     // First validate form.
     if (this._formKey.currentState.validate()) {

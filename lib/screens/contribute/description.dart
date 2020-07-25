@@ -2,13 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'form.dart';
 
 class Description extends StatelessWidget {
   final String _title;
   final String _body;
+  final Object _link;
 
-  Description(this._title, this._body);
+  Description(this._title, this._body, this._link);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class Description extends StatelessWidget {
               PageTransition(
                 type: PageTransitionType.rightToLeft,
                 child:
-                  CovidForm()),
+                  _link),
             );
           },
           child: Text('Getting Started \u2192'),
