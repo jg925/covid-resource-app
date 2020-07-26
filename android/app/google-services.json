@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1048350679764",
+    "firebase_url": "https://covid-resources-app-8044b.firebaseio.com",
+    "project_id": "covid-resources-app-8044b",
+    "storage_bucket": "covid-resources-app-8044b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048350679764:android:35045573d8ed68faae9141",
+        "android_client_info": {
+          "package_name": "com.example.covid_resource_app_master"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1048350679764-i74sib21in055hdcptd5ribohv8eil4t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPJeNO2_FTvLROv6KorBzX6yOpCITR2fw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1048350679764-i74sib21in055hdcptd5ribohv8eil4t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1048350679764-3gcnoq855gru1a4h4r94qpejela3tora.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.covidResourceAppMaster"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
