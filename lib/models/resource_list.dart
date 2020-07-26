@@ -10,7 +10,29 @@ class ResourceItems {
     return [
       ResourceItems("Restaurants",
          [ ResourceDetails(
-              "Spicy Nine Sushi", "140 W Franklin St #150, Chapel Hill, NC 27516", type:"Asian")]),
+             "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
+           ResourceDetails(
+               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
+           ResourceDetails(
+               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
+           ResourceDetails(
+               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
+           ResourceDetails(
+               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
+           ResourceDetails(
+               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
+           ResourceDetails(
+               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
+           ResourceDetails(
+               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
+           ResourceDetails(
+               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
+           ResourceDetails(
+               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
+           ResourceDetails(
+               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
+           ResourceDetails(
+               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream")]),
       ResourceItems("Free Meals",
           [ResourceDetails(
               "IFC Community Kitchen", "100 W. Rosemary Street, Chapel Hill, NC 27516", type:"Community Kitchen")]),
