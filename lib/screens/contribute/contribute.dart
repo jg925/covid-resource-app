@@ -26,7 +26,6 @@ class Contribute extends StatelessWidget {
 
             children: [
               Section("Add a Resource to this App","Description",'assets/images/restaurant.png', CovidForm()),
-              //Section("Volunteer in Your Community","Description",'', CovidForm()),
             ]),
     );
   }
