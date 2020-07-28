@@ -23,9 +23,19 @@ class Contribute extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-
             children: [
-              Section("Add a Resource to this App","Description",'assets/images/restaurant.png', CovidForm()),
+              Section(
+                  "Add a Resource to this App",
+                  "If you are a business owner and would like to help reach "+
+                  "more customers during a time of need, feel free to sign up using "+
+                  "the Getting Started button below.",
+                  'assets/images/restaurant.png',
+                  CovidForm()),
+              Section(
+                  "Volunteer in Your Community",
+                  "Description",
+                  '',
+                  CovidForm()),
             ]),
     );
   }
