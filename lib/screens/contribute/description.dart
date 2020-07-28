@@ -6,7 +6,7 @@ import 'package:page_transition/page_transition.dart';
 class Description extends StatelessWidget {
   final String _title;
   final String _body;
-  final Object _link;
+  final Widget _link;
 
   Description(this._title, this._body, this._link);
 
