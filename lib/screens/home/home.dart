@@ -16,6 +16,7 @@ class HomePageState extends State<HomePage>{
     TabItem.resources: GlobalKey<NavigatorState>(),
     TabItem.contribute: GlobalKey<NavigatorState>(),
     TabItem.help: GlobalKey<NavigatorState>(),
+    TabItem.profile: GlobalKey<NavigatorState>(),
   };
 
   void _selectTab(TabItem tabItem) {
@@ -50,6 +51,7 @@ class HomePageState extends State<HomePage>{
           _buildOffstageNavigator(TabItem.resources),
           _buildOffstageNavigator(TabItem.contribute),
           _buildOffstageNavigator(TabItem.help),
+          _buildOffstageNavigator(TabItem.profile)
         ]),
         bottomNavigationBar: BottomNavigation(
           currentTab: _currentTab,

@@ -1,5 +1,6 @@
 // screens/contribute/contribute.dart
 
+import 'package:covid_resource_app_master/screens/contribute/form.dart';
 import 'package:flutter/material.dart';
 import 'section.dart';
 
@@ -24,9 +25,7 @@ class Contribute extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
 
             children: [
-              Section("Add a Resource to this App","Description",'assets/images/restaurant.png'),
-              Section("Volunteer in Your Community","Description",''),
-              Section("Inspirations","One liner",''),
+              Section("Add a Resource to this App","Description",'assets/images/restaurant.png', CovidForm()),
             ]),
     );
   }
