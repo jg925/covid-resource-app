@@ -1,4 +1,5 @@
 import 'package:covid_resource_app_master/models/resource_details.dart';
+import 'package:covid_resource_app_master/assets/constants/constants.dart' as Constants;
 
 class ResourceItems {
   final String category;
@@ -8,62 +9,13 @@ class ResourceItems {
 
   static List<ResourceItems> fetchAll() {
     return [
-      ResourceItems("Restaurants",
-         [ ResourceDetails(
-             "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-           ResourceDetails(
-               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-           ResourceDetails(
-               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-           ResourceDetails(
-               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-           ResourceDetails(
-               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-           ResourceDetails(
-               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-           ResourceDetails(
-               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-           ResourceDetails(
-               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-           ResourceDetails(
-               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-           ResourceDetails(
-               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-           ResourceDetails(
-               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-           ResourceDetails(
-               "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream")]),
-      ResourceItems("Free Meals",
-          [ResourceDetails(
-              "IFC Community Kitchen", "100 W. Rosemary Street, Chapel Hill, NC 27516", type:"Community Kitchen")]),
-      ResourceItems("Prepared family meals",
-          [ ResourceDetails(
-              "Big Belly Que", "306 W Franklin St, Suite G, Chapel Hill, NC 27516")]),
-      ResourceItems("Specialty food & beverage",
-          [ResourceDetails(
-              "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-            ResourceDetails(
-                "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-            ResourceDetails(
-                "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-            ResourceDetails(
-                "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-            ResourceDetails(
-                "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-            ResourceDetails(
-                "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-            ResourceDetails(
-                "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-            ResourceDetails(
-                "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-            ResourceDetails(
-                "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-            ResourceDetails(
-                "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-            ResourceDetails(
-                "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream"),
-            ResourceDetails(
-                "Cold Stone Creamery", "131 E Franklin St, Chapel Hill, NC 27514", type:"Ice Cream")]),
+      ResourceItems(Constants.RESTAURANTS,
+         []),
+      ResourceItems(Constants.FREE_MEALS,
+          []),
+      ResourceItems(Constants.GROCERIES,
+          []),
+      ResourceItems(Constants.SPECIALTY_FOODS,[]),
 
     ];
   }

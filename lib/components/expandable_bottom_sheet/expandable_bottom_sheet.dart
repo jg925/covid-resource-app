@@ -349,6 +349,8 @@ class ExpandableBottomSheetState extends State<ExpandableBottomSheet>
     }
   }
 
+
+
   void _animateToTop() {
     _animateOnIsAnimating();
     _controller.value = (_positionOffset - _minOffset) / _draggableHeight;
@@ -375,19 +377,6 @@ class ExpandableBottomSheetState extends State<ExpandableBottomSheet>
     );
   }
 
-  void _animateToMiddle() {
-    _animateOnIsAnimating();
-
-    _controller.value = (_positionOffset - _minOffset) / _draggableHeight;
-    _animationMinOffset = _minOffset;
-    _oldStatus = AnimationStatus.reverse;
-    _controller.animateTo(
-      1.0,
-      duration:
-      widget.animationDurationContract ?? widget.animationDurationExtend,
-      curve: widget.animationCurveContract ?? widget.animationCurveExpand,
-    );
-  }
 
   void _animateToMax() {
     _animateOnIsAnimating();
