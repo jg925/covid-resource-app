@@ -4,8 +4,9 @@ import 'package:covid_resource_app_master/screens/resources/dropdown_resources.d
 import 'package:covid_resource_app_master/screens/resources/text_fav_history.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 import '../../components/expandable_bottom_sheet/expandable_bottom_sheet.dart';
 import 'listview_resources_list.dart';
@@ -23,6 +24,7 @@ class Resources extends StatefulWidget {
 
 
 class ResourcesState extends State<Resources> {
+  GlobalKey<ExpandableBottomSheetState> key = new GlobalKey();
   GoogleMapController mapController;
   double bottomSheetSize = 250;
   double bottomSheetMinSize = 0;
@@ -42,7 +44,10 @@ class ResourcesState extends State<Resources> {
     super.initState();
     _resourcesDropdownMenuItems = buildResourcesDropdownMenuItems();
     _bottomSheetContent = getInitialBottomSheetContent();
+
   }
+
+
 
   Column getInitialBottomSheetContent() {
     return Column(
@@ -59,7 +64,7 @@ class ResourcesState extends State<Resources> {
                   _selectedItem = value;
                   bottomSheetSize = 500;
                   bottomSheetMinSize = 250;
-                  _bottomSheetContent = getUpdatedBottomSheetContent(value);
+                  _bottomSheetContent = getUpdatedBottomSheetContent(value, context);
                 });
               }),
           Spacer(flex: 2,),
@@ -74,7 +79,7 @@ class ResourcesState extends State<Resources> {
   }
 
 
-  Column getUpdatedBottomSheetContent(value) {
+  Column getUpdatedBottomSheetContent(value, context) {
     return Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -88,60 +93,25 @@ class ResourcesState extends State<Resources> {
               onChanged: (value) {
                 setState(() {
                   _selectedItem = value;
-                  _bottomSheetContent = getUpdatedBottomSheetContent(value);
+                  _bottomSheetContent = getUpdatedBottomSheetContent(value, context);
                 });
               }),
-          SizedBox(height: 20,),
           Expanded(
-              child: ListviewResourcesList(_selectedItem.value),
+              child: ListviewResourcesList(_selectedItem.collection),
           ),
+
+
 
         ]
     );
   }
 
-  //Firebase tutorial code start
-  Widget _buildBody(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('restaurant_resources').snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
-
-        return _buildList(context, snapshot.data.documents);
-      },
-    );
-  }
-
-  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
-    return ListView(
-      padding: const EdgeInsets.only(top: 20.0),
-      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
-    );
-  }
-
-  Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final record = Record.fromSnapshot(data);
-
-    return Padding(
-      key: ValueKey(record.name),
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: ListTile(
-          title: Text(record.name),
-          trailing: Text(record.address.toString()),
-          ),
-      ),
-    );
+  Column getBottomSheetContent(ScrollController scrollController) {
+    return getInitialBottomSheetContent();
   }
 
 
 
-
-  //Firebase tutorial code end
 
 
 
@@ -156,6 +126,7 @@ class ResourcesState extends State<Resources> {
           backgroundColor: widget.color,
         ),
         body: ExpandableBottomSheet(
+          key: key,
           persistentContentHeight: bottomSheetMinSize,
           background: GoogleMap(
             onMapCreated: _onMapCreated,
@@ -172,29 +143,12 @@ class ResourcesState extends State<Resources> {
             ),
           ),
           expandableContent: Container(
-            height: bottomSheetSize,
-            color: Colors.white,
-            child:  _buildBody(context)//_bottomSheetContent
+              height: bottomSheetSize,
+              color: Colors.white,
+              child:  _bottomSheetContent
           ),
-       )
+        ),
     );
   }
 }
 
-class Record {
-  final String name;
-  final String address;
-  final DocumentReference reference;
-
-  Record.fromMap(Map<String, dynamic> map, {this.reference})
-      : assert(map['name'] != null),
-        assert(map['address'] != null),
-        name = map['name'],
-        address = map['address'];
-
-  Record.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data, reference: snapshot.reference);
-
-  @override
-  String toString() => "Record<$name:$address>";
-}
