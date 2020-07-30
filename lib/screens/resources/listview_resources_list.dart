@@ -3,6 +3,7 @@ import 'package:covid_resource_app_master/models/resource_details.dart';
 import 'package:covid_resource_app_master/models/resource_list.dart';
 import 'package:covid_resource_app_master/screens/resources/text_resource_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 final List<String> entries = <String>[ 'C', 'A', 'B', 'C', 'A', 'B', 'C', 'A', 'B', 'C', 'A', 'B', 'C'];
 
@@ -12,10 +13,11 @@ class ListviewResourcesList extends StatefulWidget {
 //  final String text;
 //  final Icon icon;
   final String category;
+  final ScrollController scrollViewController;
 
 
 
-  ListviewResourcesList(this.category);
+  ListviewResourcesList(this.category, this.scrollViewController);
 
 
 
@@ -28,6 +30,7 @@ class ListviewResourcesListState extends State<ListviewResourcesList> {
 
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     return ListView(
+      controller: widget.scrollViewController,
       padding: const EdgeInsets.only(top: 20.0),
       children: snapshot.map((data) => _buildListItem(context, data)).toList(),
     );

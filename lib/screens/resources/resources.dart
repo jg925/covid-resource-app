@@ -2,7 +2,6 @@
 
 import 'package:covid_resource_app_master/screens/resources/dropdown_resources.dart';
 import 'package:covid_resource_app_master/screens/resources/text_fav_history.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -29,6 +28,7 @@ class ResourcesState extends State<Resources> {
   double bottomSheetSize = 250;
   double bottomSheetMinSize = 0;
 
+
   final LatLng _center = const LatLng(45.521563, -122.677433);
 
   void _onMapCreated(GoogleMapController controller) {
@@ -38,12 +38,19 @@ class ResourcesState extends State<Resources> {
   List<DropdownMenuItem<DropdownResources>> _resourcesDropdownMenuItems;
   DropdownResources _selectedItem;
   Column _bottomSheetContent;
+  ScrollController _scrollViewController;
+  String _headerContent;
+  bool _showAppbar = true;
+  bool _showFAB = false;
+  bool _showInitialHeader = true;
 
 
   void initState() {
     super.initState();
     _resourcesDropdownMenuItems = buildResourcesDropdownMenuItems();
     _bottomSheetContent = getInitialBottomSheetContent();
+    _scrollViewController = ScrollController();
+    _headerContent = 'How can we help?';
 
   }
 
@@ -65,6 +72,10 @@ class ResourcesState extends State<Resources> {
                   bottomSheetSize = 500;
                   bottomSheetMinSize = 250;
                   _bottomSheetContent = getUpdatedBottomSheetContent(value, context);
+                  _headerContent = "Pull down to minimize";
+                  _showInitialHeader = false;
+                  _showAppbar = false;
+                  _showFAB = true;
                 });
               }),
           Spacer(flex: 2,),
@@ -97,7 +108,17 @@ class ResourcesState extends State<Resources> {
                 });
               }),
           Expanded(
-              child: ListviewResourcesList(_selectedItem.collection),
+              child: NotificationListener<ScrollUpdateNotification>(
+                  onNotification: (ScrollNotification scrollInfo){
+                    if (_scrollViewController.position.userScrollDirection ==
+                        ScrollDirection.reverse) {
+                      key.currentState.expand();
+                    }
+                    return true;
+                  },
+                child: ListviewResourcesList(_selectedItem.collection, _scrollViewController),
+    )
+
           ),
 
 
@@ -119,27 +140,41 @@ class ResourcesState extends State<Resources> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+        appBar: _showAppbar ? AppBar(
           title: Text(
             "Resources",
           ),
           backgroundColor: widget.color,
+        )
+            : PreferredSize(
+          child: Container(),
+          preferredSize: Size(30.0, 0.0),
         ),
         body: ExpandableBottomSheet(
           key: key,
+          animationDurationExtend: Duration(milliseconds: 500),
           persistentContentHeight: bottomSheetMinSize,
-          background: GoogleMap(
-            onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(
-              target: _center,
-              zoom: 11.0,
-            ),
+          background: Column (
+            children: <Widget>[
+              Expanded(
+                child:  GoogleMap(
+                  onMapCreated: _onMapCreated,
+                  initialCameraPosition: CameraPosition(
+                    target: _center,
+                    zoom: 11.0,
+                  ),
+                ),
+              )
+
+            ],
+
           ),
           persistentHeader: Container(
-            height: 40,
+            height: _showInitialHeader? 60 : 40,
             color: Colors.grey,
             child: Center(
-              child: Text('How can we help?'),
+              child: Text(_headerContent,
+                style: TextStyle(color: Colors.black87, fontSize: _showInitialHeader ? 22: 16),),
             ),
           ),
           expandableContent: Container(
@@ -148,6 +183,32 @@ class ResourcesState extends State<Resources> {
               child:  _bottomSheetContent
           ),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+        floatingActionButton: Visibility(
+          child: Padding (
+              padding: const EdgeInsets.only(top: 70.0),
+              child: new FloatingActionButton(
+                  elevation: 0.0,
+                  child: new Icon(Icons.arrow_back),
+                  backgroundColor: new Color(0xFFE57373),
+                  onPressed: (){
+                      setState(() {
+                        _selectedItem = null;
+                        _showFAB = false;
+                        _showAppbar = true;
+                        bottomSheetSize = 250;
+                        bottomSheetMinSize = 0;
+                        _headerContent = 'How can we help?';
+                        _showInitialHeader = true;
+                        _bottomSheetContent = getInitialBottomSheetContent();
+
+                      });
+                  }
+              )
+          ),
+          visible: _showFAB,
+        )
+
     );
   }
 }
