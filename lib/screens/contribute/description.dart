@@ -1,7 +1,8 @@
 // screens/contribute/description.dart
 
+import 'package:covid_resource_app_master/style.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
+import 'links.dart';
 
 class Description extends StatelessWidget {
   final String _title;
@@ -17,10 +18,10 @@ class Description extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
       Container(
-        child: Text(_title),
+        child: Text(_title, style: TitleTextStyle),
       ),
       Container(
-        child: Text(_body),
+        child: Text(_body, style: DescriptionTextStyle),
       ),
       Container(
         child: FlatButton(
@@ -28,13 +29,7 @@ class Description extends StatelessWidget {
           textColor: Colors.blue,
           padding: EdgeInsets.all(8.0),
           onPressed: () {
-            Navigator.push(
-              context,
-              PageTransition(
-                type: PageTransitionType.rightToLeft,
-                child:
-                  _link),
-            );
+            if (_link != null) CovidFormLink(context, _link);
           },
           child: Text('Getting Started \u2192'),
         ),

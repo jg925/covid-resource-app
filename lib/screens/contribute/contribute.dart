@@ -1,6 +1,7 @@
 // screens/contribute/contribute.dart
 
 import 'package:covid_resource_app_master/screens/contribute/form.dart';
+import 'package:covid_resource_app_master/style.dart';
 import 'package:flutter/material.dart';
 import 'section.dart';
 
@@ -16,6 +17,7 @@ class Contribute extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             "Ways You Can Help",
+            style: AppBarTextStyle
           ),
           backgroundColor: color,
         ),
@@ -33,9 +35,9 @@ class Contribute extends StatelessWidget {
                   CovidForm()),
               Section(
                   "Volunteer in Your Community",
-                  "Description",
-                  '',
-                  CovidForm()),
+                  "",
+                  'assets/images/boston_garden.png',
+                  null),
             ]),
     );
   }
