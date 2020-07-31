@@ -5,7 +5,7 @@ import 'package:covid_resource_app_master/screens/resources/text_fav_history.dar
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import 'package:geocoder/geocoder.dart';
 
 import '../../components/expandable_bottom_sheet/expandable_bottom_sheet.dart';
 import 'listview_resources_list.dart';
@@ -20,6 +20,15 @@ class Resources extends StatefulWidget {
   ResourcesState createState() => ResourcesState();
 }
 
+Future<LatLng> getAddress() async {
+  final query = "1600 Amphiteatre Parkway, Mountain View";
+  var addresses = await Geocoder.local.findAddressesFromQuery(query);
+  var sample = addresses.first;
+  var coords = LatLng(sample.coordinates.latitude, sample.coordinates.longitude);
+  return coords;
+}
+
+
 
 
 class ResourcesState extends State<Resources> {
@@ -29,7 +38,8 @@ class ResourcesState extends State<Resources> {
   double bottomSheetMinSize = 0;
 
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+
+  LatLng _center;//const LatLng(45.521563, -122.677433);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -51,6 +61,11 @@ class ResourcesState extends State<Resources> {
     _bottomSheetContent = getInitialBottomSheetContent();
     _scrollViewController = ScrollController();
     _headerContent = 'How can we help?';
+    getAddress().then((LatLng coords){
+      setState(() {
+        _center = coords;
+      });
+    });
 
   }
 
@@ -61,7 +76,7 @@ class ResourcesState extends State<Resources> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Spacer(flex: 3,),
+          Spacer(flex: 2,),
           DropdownButton<DropdownResources>(
               value: _selectedItem,
               items: _resourcesDropdownMenuItems,
@@ -70,7 +85,7 @@ class ResourcesState extends State<Resources> {
                 setState(() {
                   _selectedItem = value;
                   bottomSheetSize = 500;
-                  bottomSheetMinSize = 250;
+                  bottomSheetMinSize = 300;
                   _bottomSheetContent = getUpdatedBottomSheetContent(value, context);
                   _headerContent = "Pull down to minimize";
                   _showInitialHeader = false;
@@ -120,8 +135,6 @@ class ResourcesState extends State<Resources> {
     )
 
           ),
-
-
 
         ]
     );
@@ -201,8 +214,9 @@ class ResourcesState extends State<Resources> {
                         _headerContent = 'How can we help?';
                         _showInitialHeader = true;
                         _bottomSheetContent = getInitialBottomSheetContent();
-
                       });
+
+
                   }
               )
           ),

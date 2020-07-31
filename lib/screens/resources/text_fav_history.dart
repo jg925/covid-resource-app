@@ -30,7 +30,7 @@ class TextFavHistoryState extends State<TextFavHistory> {
 
 Container getLeftSection(icon){
   return Container(
-    padding: EdgeInsets.only(left: 30.0),
+    padding: EdgeInsets.only(left: 50.0),
     child: icon,
   );
 }

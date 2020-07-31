@@ -31,7 +31,7 @@ class ListviewResourcesListState extends State<ListviewResourcesList> {
   Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     return ListView(
       controller: widget.scrollViewController,
-      padding: const EdgeInsets.only(top: 20.0),
+      padding: const EdgeInsets.only(top: 10.0),
       children: snapshot.map((data) => _buildListItem(context, data)).toList(),
     );
   }
