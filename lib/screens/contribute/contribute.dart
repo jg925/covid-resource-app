@@ -35,7 +35,9 @@ class Contribute extends StatelessWidget {
                   CovidForm()),
               Section(
                   "Volunteer in Your Community",
-                  "",
+                  "Use the following link to explore opportunities to "+
+                  "give back to your community during times of need. "+
+                  "Your help is greatly appreciated.",
                   'assets/images/boston_garden.png',
                   null),
             ]),
