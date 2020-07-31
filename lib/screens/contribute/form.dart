@@ -1,22 +1,17 @@
 // screens/contribute/form.dart
 
 import 'package:flutter/material.dart';
-import 'package:validators/validators.dart';
+import '../../models/resource_details.dart';
 
 class CovidForm extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return _CovidFormState();
-  }
+  _CovidFormState createState() => _CovidFormState();
 }
 
-class _FormData {
-  String resourceName = '';
-}
 
 class _CovidFormState extends State<CovidForm> {
-  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  _FormData _data = _FormData();
+  final _formKey = GlobalKey<FormState>();
+  final _data = Resource();
 
   String _validateResourceName(String value) {
     //If empty, throw an error
@@ -27,7 +22,11 @@ class _CovidFormState extends State<CovidForm> {
   }
 
   String _validPhoneNumber(String value) {
-
+    RegExp re = RegExp(r'[0-9]{3}-[0-9]{3}-[0-9]{4}');
+    if (re.hasMatch(value)) {
+      return null;
+    }
+    return "Phone number not valid.";
   }
 
   void submit() {
@@ -41,7 +40,9 @@ class _CovidFormState extends State<CovidForm> {
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
+    final Size screenSize = MediaQuery
+        .of(context)
+        .size;
 
     return Scaffold(
       appBar: AppBar(
@@ -60,6 +61,70 @@ class _CovidFormState extends State<CovidForm> {
                 onSaved: (String value) {
                   this._data.resourceName = value;
                 },
+              ),
+              TextFormField(
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  labelText: 'Phone Number of Resource',
+                  hintText: '000-000-0000',
+                ),
+                validator: this._validPhoneNumber,
+                onSaved: (String value) {
+                  this._data.phoneNumber = value;
+                },
+              ),
+              TextFormField(
+                keyboardType: TextInputType.streetAddress,
+                decoration: InputDecoration(labelText: 'Street Address'),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter an address.';
+                  }
+                  return null;
+                },
+                onSaved: (String value) {
+                  this._data.address = value;
+                }
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                child: Text('Type of Resource'),
+              ),
+              CheckboxListTile(
+                title: Text('Restaurant'),
+                value:_data.resourceTypes[Resource.restaurants],
+                onChanged: (value) {
+                  setState(() => {
+                    _data.resourceTypes[Resource.restaurants] = value,
+                  });
+                }
+              ),
+              CheckboxListTile(
+                  title: Text('Free Meals'),
+                  value:_data.resourceTypes[Resource.freeMeals],
+                  onChanged: (value) {
+                    setState(() => {
+                      _data.resourceTypes[Resource.freeMeals] = value,
+                    });
+                  }
+              ),
+              CheckboxListTile(
+                  title: Text('Prepared Family Meals'),
+                  value:_data.resourceTypes[Resource.preparedFamilyMeals],
+                  onChanged: (value) {
+                    setState(() => {
+                      _data.resourceTypes[Resource.preparedFamilyMeals] = value,
+                    });
+                  }
+              ),
+              CheckboxListTile(
+                  title: Text('Specialty Food & Beverage'),
+                  value:_data.resourceTypes[Resource.specialtyFoodBev],
+                  onChanged: (value) {
+                    setState(() => {
+                      _data.resourceTypes[Resource.specialtyFoodBev] = value,
+                    });
+                  }
               ),
               Container(
                 width: screenSize.width,
