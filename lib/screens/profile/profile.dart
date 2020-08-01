@@ -14,14 +14,6 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        /* Text(
-            "Profile ",
-            style: TextStyle(
-              fontSize: 35.0,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),*/
         Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -83,15 +75,6 @@ class Profile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                /*Text(
-                  "Bookmarks",
-                  style: TextStyle(
-                      fontSize: 12.0,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                  ),
-                ), */
-                Icon(Icons.bookmark),
                 TextSection("Chef & the Farmer", "Address: 120 W Gordon St, Kinston, NC 28501"),
                 TextSection("Whiskey Pig Craft Butchery", "214 N Herritage St, Kinston, NC 28501"),
                 TextSection("Sugar Hill Pizzeria", "211 N Herritage St, Kinston, NC 28501"),
