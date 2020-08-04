@@ -1,6 +1,5 @@
 import 'package:covid_resource_app_master/screens/contribute/contribute.dart';
 import 'package:covid_resource_app_master/screens/help/help.dart';
-import 'package:covid_resource_app_master/screens/resources/color_detail_page.dart';
 import 'package:covid_resource_app_master/screens/resources/resources.dart';
 import 'package:covid_resource_app_master/screens/profile/profile.dart';
 import 'package:flutter/material.dart';
@@ -39,11 +38,6 @@ class TabNavigator extends StatelessWidget {
             onPush: (materialIndex) =>
                 _push(context, materialIndex: materialIndex),
           ),
-          TabNavigatorRoutes.detail: (context) => ColorDetailPage(
-            color: activeTabColor[tabItem],
-            title: tabName[tabItem],
-            materialIndex: materialIndex,
-          ),
         };
       }
       break;
@@ -54,11 +48,6 @@ class TabNavigator extends StatelessWidget {
             title: tabName[tabItem],
             onPush: (materialIndex) =>
                 _push(context, materialIndex: materialIndex),
-          ),
-          TabNavigatorRoutes.detail: (context) => ColorDetailPage(
-            color: activeTabColor[tabItem],
-            title: tabName[tabItem],
-            materialIndex: materialIndex,
           ),
         };
       }
@@ -71,11 +60,6 @@ class TabNavigator extends StatelessWidget {
             onPush: (materialIndex) =>
                 _push(context, materialIndex: materialIndex),
           ),
-          TabNavigatorRoutes.detail: (context) => ColorDetailPage(
-            color: activeTabColor[tabItem],
-            title: tabName[tabItem],
-            materialIndex: materialIndex,
-          ),
         };
       }
       break;
@@ -86,11 +70,6 @@ class TabNavigator extends StatelessWidget {
             title: tabName[tabItem],
             onPush: (materialIndex) =>
                 _push(context, materialIndex: materialIndex),
-          ),
-          TabNavigatorRoutes.detail: (context) => ColorDetailPage(
-            color: activeTabColor[tabItem],
-            title: tabName[tabItem],
-            materialIndex: materialIndex,
           ),
         };
       }

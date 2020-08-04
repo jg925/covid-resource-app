@@ -1,18 +1,18 @@
 library constants;
 
-const String RESTAURANTS = "Restaurants";
-const String FREE_MEALS = "Free meals";
-const String GROCERIES = "Groceries";
-const String SPECIALTY_FOODS = "Specialty food & beverage";
+const String restaurants = "Restaurants";
+const String freeMeals = "Free meals";
+const String groceries = "Groceries";
+const String specialtyFoods = "Specialty food & beverage";
 
-const String FIREBASE_RESTAURANTS = "restaurant_resources";
-const String FIREBASE_FREE_MEALS = "free_meal_resources";
-const String FIREBASE_GROCERIES = "grocery_resources";
-const String FIREBASE_SPECIALTY_FOODS = "specialty_food_resources";
+const String firebaseRestaurants = "restaurant_resources";
+const String firebaseFreeMeals = "free_meal_resources";
+const String firebaseGroceries = "grocery_resources";
+const String firebaseSpecialtyFoods = "specialty_food_resources";
 
-const String STR_NAME = "name";
-const String STR_ADDRESS = "address";
-const String STR_TYPE = "type";
-const String STR_DELIVERY = "delivery";
-const String STR_PICKUP = "curbside_pickup";
-const String STR_ONLINE = "order_online";
+const String strName = "name";
+const String strAddress = "address";
+const String strType = "type";
+const String strDelivery = "delivery";
+const String strPickup = "curbside_pickup";
+const String strOnline = "order_online";

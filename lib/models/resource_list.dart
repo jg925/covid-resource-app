@@ -9,13 +9,13 @@ class ResourceItems {
 
   static List<ResourceItems> fetchAll() {
     return [
-      ResourceItems(Constants.RESTAURANTS,
+      ResourceItems(Constants.restaurants,
          []),
-      ResourceItems(Constants.FREE_MEALS,
+      ResourceItems(Constants.freeMeals,
           []),
-      ResourceItems(Constants.GROCERIES,
+      ResourceItems(Constants.groceries,
           []),
-      ResourceItems(Constants.SPECIALTY_FOODS,[]),
+      ResourceItems(Constants.specialtyFoods,[]),
 
     ];
   }

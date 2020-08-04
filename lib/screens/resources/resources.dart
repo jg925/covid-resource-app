@@ -5,8 +5,6 @@ import 'package:covid_resource_app_master/screens/resources/text_fav_history.dar
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geocoder/geocoder.dart';
-
 import '../../components/expandable_bottom_sheet/expandable_bottom_sheet.dart';
 import 'listview_resources_list.dart';
 
@@ -21,20 +19,13 @@ class Resources extends StatefulWidget {
 }
 
 
-
-
-
-
 class ResourcesState extends State<Resources> {
   GlobalKey<ExpandableBottomSheetState> key = new GlobalKey();
+
   GoogleMapController _mapController;
-  double bottomSheetSize = 250;
-  double bottomSheetMinSize = 0;
   GoogleMap _map;
-
-
-
-
+  ScrollController _scrollViewController;
+  LatLng _center;
 
   void _onMapCreated(GoogleMapController controller) {
     _mapController = controller;
@@ -42,25 +33,27 @@ class ResourcesState extends State<Resources> {
 
   List<DropdownMenuItem<DropdownResources>> _resourcesDropdownMenuItems;
   DropdownResources _selectedItem;
+
+
   Column _bottomSheetContent;
-  ScrollController _scrollViewController;
   String _headerContent;
+  double bottomSheetSize = 250;
+  double bottomSheetMinSize = 0;
+  double _mapSize = 500;
+
   bool _showAppbar = true;
   bool _showFAB = false;
   bool _showInitialHeader = true;
-  LatLng _center;
-  List<Marker> markers = <Marker>[];
-  Set<Marker> _markers;
+
 
   void initState() {
     super.initState();
+    _center =  LatLng(35.913460, -79.055470);
+    _map = getMap();
     _resourcesDropdownMenuItems = buildResourcesDropdownMenuItems();
     _bottomSheetContent = getInitialBottomSheetContent();
     _scrollViewController = ScrollController();
     _headerContent = 'How can we help?';
-    _center =  LatLng(35.913460, -79.055470);
-    _map = getMap();
-    _markers = Set<Marker>.of(markers);
   }
 
   GoogleMap getMap(){
@@ -70,11 +63,9 @@ class ResourcesState extends State<Resources> {
         target: _center,
         zoom: 20.0,
       ),
-      markers: _markers,
       zoomGesturesEnabled: true,
     );
   }
-
 
 
   Column getInitialBottomSheetContent() {
@@ -92,11 +83,12 @@ class ResourcesState extends State<Resources> {
                   _selectedItem = value;
                   bottomSheetSize = 500;
                   bottomSheetMinSize = 300;
-                  _bottomSheetContent = getUpdatedBottomSheetContent(value, context);
+                  _bottomSheetContent = _getUpdatedBottomSheetContent(value, context);
                   _headerContent = "Pull down to minimize";
                   _showInitialHeader = false;
                   _showAppbar = false;
                   _showFAB = true;
+                  _mapSize = 250;
                 });
               }),
           Spacer(flex: 2,),
@@ -111,10 +103,8 @@ class ResourcesState extends State<Resources> {
   }
 
 
-  Column getUpdatedBottomSheetContent(value, context) {
-//    markers = <Marker>[];
-    var listview = ListviewResourcesList(_selectedItem.collection, _scrollViewController, _mapController, _map);
-    var updated_info = Column(
+  Column _getUpdatedBottomSheetContent(value, context) {
+    return Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -127,7 +117,7 @@ class ResourcesState extends State<Resources> {
               onChanged: (value) {
                 setState(() {
                   _selectedItem = value;
-                  _bottomSheetContent = getUpdatedBottomSheetContent(value, context);
+                  _bottomSheetContent = _getUpdatedBottomSheetContent(value, context);
                 });
               }),
           Expanded(
@@ -139,30 +129,41 @@ class ResourcesState extends State<Resources> {
                     }
                     return true;
                   },
-                child: listview,//Text(listview.markers.length.toString())//listview,
-    )
-
+                child: ListviewResourcesList(_selectedItem.collection, _scrollViewController, _mapController),
+             )
           ),
-
         ]
     );
-
-  setState(() {
-    _markers = Set<Marker>.of(listview.markers);
-  });
-
-
-    return updated_info;
   }
 
-  Column getBottomSheetContent(ScrollController scrollController) {
-    return getInitialBottomSheetContent();
+  Widget _getFAB(){
+    return Visibility(
+      child: Padding (
+          padding: const EdgeInsets.only(top: 70.0),
+          child: new FloatingActionButton(
+              elevation: 0.0,
+              child: new Icon(Icons.arrow_back),
+              backgroundColor: new Color(0xFFE57373),
+              onPressed: (){
+                setState(() {
+                  _selectedItem = null;
+                  _showFAB = false;
+                  _showAppbar = true;
+                  bottomSheetSize = 250;
+                  bottomSheetMinSize = 0;
+                  _headerContent = 'How can we help?';
+                  _showInitialHeader = true;
+                  _bottomSheetContent = getInitialBottomSheetContent();
+                  _mapSize = 500;
+                });
+
+
+              }
+          )
+      ),
+      visible: _showFAB,
+    );
   }
-
-
-
-
-
 
 
   @override
@@ -178,15 +179,15 @@ class ResourcesState extends State<Resources> {
           child: Container(),
           preferredSize: Size(30.0, 0.0),
         ),
+
         body: ExpandableBottomSheet(
           key: key,
           animationDurationExtend: Duration(milliseconds: 500),
           persistentContentHeight: bottomSheetMinSize,
           background: Container(
-            height: 250,
+            height: _mapSize,
             alignment: Alignment.topCenter,
             child: _map,
-
           ),
           persistentHeader: Container(
             height: _showInitialHeader? 60 : 40,
@@ -196,6 +197,7 @@ class ResourcesState extends State<Resources> {
                 style: TextStyle(color: Colors.black87, fontSize: _showInitialHeader ? 22: 16),),
             ),
           ),
+
           expandableContent: Container(
               height: bottomSheetSize,
               color: Colors.white,
@@ -203,33 +205,7 @@ class ResourcesState extends State<Resources> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
-        floatingActionButton: Visibility(
-          child: Padding (
-              padding: const EdgeInsets.only(top: 70.0),
-              child: new FloatingActionButton(
-                  elevation: 0.0,
-                  child: new Icon(Icons.arrow_back),
-                  backgroundColor: new Color(0xFFE57373),
-                  onPressed: (){
-                      setState(() {
-                        _selectedItem = null;
-                        _showFAB = false;
-                        _showAppbar = true;
-                        bottomSheetSize = 250;
-                        bottomSheetMinSize = 0;
-                        _headerContent = 'How can we help?';
-                        _showInitialHeader = true;
-                        _bottomSheetContent = getInitialBottomSheetContent();
-                        markers = <Marker>[];
-                      });
-
-
-                  }
-              )
-          ),
-          visible: _showFAB,
-        )
-
+        floatingActionButton: _getFAB(),
     );
   }
 }
