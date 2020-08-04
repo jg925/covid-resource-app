@@ -154,6 +154,7 @@ class ExpandableBottomSheetState extends State<ExpandableBottomSheet>
   void initState() {
     super.initState();
     _controller = AnimationController(
+      vsync: this,
       lowerBound: 0.0,
       upperBound: 1.0,
     );
