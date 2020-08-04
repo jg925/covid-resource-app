@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 
-void CovidFormLink(BuildContext context, Widget _link) {
+void covidFormLink(BuildContext context, Widget _link) {
   Navigator.push(
     context,
     PageTransition(

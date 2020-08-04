@@ -29,7 +29,7 @@ class Description extends StatelessWidget {
           textColor: Colors.blue,
           padding: EdgeInsets.all(8.0),
           onPressed: () {
-            if (_link != null) CovidFormLink(context, _link);
+            if (_link != null) covidFormLink(context, _link);
           },
           child: Text('Getting Started \u2192'),
         ),
