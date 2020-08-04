@@ -8,7 +8,7 @@ class Section extends StatelessWidget {
   final String _title;
   final String _body;
   final String _assetPath;
-  final Object _link;
+  final Widget _link;
 
   //static const double _hPad = 16.0;
   Section(this._title, this._body, this._assetPath, this._link);
@@ -16,10 +16,11 @@ class Section extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Container(
+          Expanded(
             child: Description(_title, _body, _link),
           ),
           Container(
