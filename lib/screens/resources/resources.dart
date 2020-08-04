@@ -20,29 +20,24 @@ class Resources extends StatefulWidget {
   ResourcesState createState() => ResourcesState();
 }
 
-Future<LatLng> getAddress() async {
-  final query = "1600 Amphiteatre Parkway, Mountain View";
-  var addresses = await Geocoder.local.findAddressesFromQuery(query);
-  var sample = addresses.first;
-  var coords = LatLng(sample.coordinates.latitude, sample.coordinates.longitude);
-  return coords;
-}
+
 
 
 
 
 class ResourcesState extends State<Resources> {
   GlobalKey<ExpandableBottomSheetState> key = new GlobalKey();
-  GoogleMapController mapController;
+  GoogleMapController _mapController;
   double bottomSheetSize = 250;
   double bottomSheetMinSize = 0;
+  GoogleMap _map;
 
 
 
-  LatLng _center;//const LatLng(45.521563, -122.677433);
+
 
   void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
+    _mapController = controller;
   }
 
   List<DropdownMenuItem<DropdownResources>> _resourcesDropdownMenuItems;
@@ -53,7 +48,9 @@ class ResourcesState extends State<Resources> {
   bool _showAppbar = true;
   bool _showFAB = false;
   bool _showInitialHeader = true;
-
+  LatLng _center;
+  List<Marker> markers = <Marker>[];
+  Set<Marker> _markers;
 
   void initState() {
     super.initState();
@@ -61,12 +58,21 @@ class ResourcesState extends State<Resources> {
     _bottomSheetContent = getInitialBottomSheetContent();
     _scrollViewController = ScrollController();
     _headerContent = 'How can we help?';
-    getAddress().then((LatLng coords){
-      setState(() {
-        _center = coords;
-      });
-    });
+    _center =  LatLng(35.913460, -79.055470);
+    _map = getMap();
+    _markers = Set<Marker>.of(markers);
+  }
 
+  GoogleMap getMap(){
+    return GoogleMap(
+      onMapCreated: _onMapCreated,
+      initialCameraPosition: CameraPosition(
+        target: _center,
+        zoom: 20.0,
+      ),
+      markers: _markers,
+      zoomGesturesEnabled: true,
+    );
   }
 
 
@@ -106,7 +112,9 @@ class ResourcesState extends State<Resources> {
 
 
   Column getUpdatedBottomSheetContent(value, context) {
-    return Column(
+//    markers = <Marker>[];
+    var listview = ListviewResourcesList(_selectedItem.collection, _scrollViewController, _mapController, _map);
+    var updated_info = Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -131,13 +139,20 @@ class ResourcesState extends State<Resources> {
                     }
                     return true;
                   },
-                child: ListviewResourcesList(_selectedItem.collection, _scrollViewController),
+                child: listview,//Text(listview.markers.length.toString())//listview,
     )
 
           ),
 
         ]
     );
+
+  setState(() {
+    _markers = Set<Marker>.of(listview.markers);
+  });
+
+
+    return updated_info;
   }
 
   Column getBottomSheetContent(ScrollController scrollController) {
@@ -167,19 +182,10 @@ class ResourcesState extends State<Resources> {
           key: key,
           animationDurationExtend: Duration(milliseconds: 500),
           persistentContentHeight: bottomSheetMinSize,
-          background: Column (
-            children: <Widget>[
-              Expanded(
-                child:  GoogleMap(
-                  onMapCreated: _onMapCreated,
-                  initialCameraPosition: CameraPosition(
-                    target: _center,
-                    zoom: 11.0,
-                  ),
-                ),
-              )
-
-            ],
+          background: Container(
+            height: 250,
+            alignment: Alignment.topCenter,
+            child: _map,
 
           ),
           persistentHeader: Container(
@@ -214,6 +220,7 @@ class ResourcesState extends State<Resources> {
                         _headerContent = 'How can we help?';
                         _showInitialHeader = true;
                         _bottomSheetContent = getInitialBottomSheetContent();
+                        markers = <Marker>[];
                       });
 
 
