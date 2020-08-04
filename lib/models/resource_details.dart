@@ -1,20 +1,23 @@
-class Resource {
-  static const String restaurants = 'Restaurants';
-  static const String freeMeals = 'Free Meals';
-  static const String preparedFamilyMeals = 'Prepared Family Meals';
-  static const String specialtyFoodBev = 'Specialty Food & Beverage';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  String resourceName = '';
-  String phoneNumber = '';
-  String address = '';
-  Map<String, bool> resourceTypes = {
-    restaurants: false,
-    freeMeals: false,
-    preparedFamilyMeals: false,
-    specialtyFoodBev: false
-  };
+class ResourceDetails {
+  final String name;
+  final String address;
+  final DocumentReference reference;
 
-  save() {
-    print('saving resource data using web service');
-  }
+  ResourceDetails.fromMap(Map<String, dynamic> map, {this.reference})
+      : assert(map['name'] != null),
+        assert(map['address'] != null),
+        assert(map['name'] != null),
+        assert(map['address'] != null),
+        assert(map['name'] != null),
+        assert(map['address'] != null),
+        name = map['name'],
+        address = map['address'];
+
+  ResourceDetails.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data, reference: snapshot.reference);
+
+  @override
+  String toString() => "ResourceDetails<$name:$address>";
 }

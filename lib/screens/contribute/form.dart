@@ -1,7 +1,7 @@
 // screens/contribute/form.dart
 
 import 'package:flutter/material.dart';
-import '../../models/resource_details.dart';
+import '../../models/resource_model.dart';
 
 class CovidForm extends StatefulWidget {
   @override
@@ -74,7 +74,7 @@ class _CovidFormState extends State<CovidForm> {
                 },
               ),
               TextFormField(
-                keyboardType: TextInputType.streetAddress,
+                keyboardType: TextInputType.text,//streetAddress,
                 decoration: InputDecoration(labelText: 'Street Address'),
                 validator: (value) {
                   if (value.isEmpty) {
