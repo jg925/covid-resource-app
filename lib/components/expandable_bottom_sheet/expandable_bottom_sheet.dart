@@ -128,10 +128,6 @@ class ExpandableBottomSheetState extends State<ExpandableBottomSheet>
   bool _useDrag = true;
   bool _callCallbacks = false;
 
-  bool _atMiddle = false;
-  bool _atTop = false;
-  bool _atBottom = false;
-
   /// Expands the content of the widget.
   void expand() {
     _afterUpdateWidgetBuild(false);
@@ -158,7 +154,6 @@ class ExpandableBottomSheetState extends State<ExpandableBottomSheet>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      vsync: this,
       lowerBound: 0.0,
       upperBound: 1.0,
     );

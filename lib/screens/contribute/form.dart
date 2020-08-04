@@ -31,8 +31,10 @@ class _CovidFormState extends State<CovidForm> {
 
   void submit() {
     // First validate form.
-    if (this._formKey.currentState.validate()) {
-      _formKey.currentState.save(); // Save our form now.
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save(); // Save our form now.
+      _data.save();
 
       Scaffold.of(context).showSnackBar(SnackBar(content: Text('Successful!')));
     }
@@ -74,7 +76,7 @@ class _CovidFormState extends State<CovidForm> {
                 },
               ),
               TextFormField(
-                keyboardType: TextInputType.text,//streetAddress,
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(labelText: 'Street Address'),
                 validator: (value) {
                   if (value.isEmpty) {
