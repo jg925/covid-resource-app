@@ -1,6 +1,9 @@
+import 'package:covid_resource_app_master/screens/profile/button.dart';
+import 'package:covid_resource_app_master/screens/profile/editprofile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'text_section.dart';
+import 'settings.dart';
 
 class Profile extends StatelessWidget {
   Profile({this.color, this.title, this.onPush});
@@ -19,12 +22,12 @@ class Profile extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.deepPurpleAccent, Colors.indigoAccent],
+                colors: [Colors.deepPurpleAccent, Colors.deepPurple],
               )
           ),
           child: Container(
               width: double.infinity,
-              height: 250.0,
+              height: 300.0,
               child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,21 +52,34 @@ class Profile extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                         children:[
                           Text(
-                            "Katherine Johnson",
+                            "   Katherine Johnson",
                             style: TextStyle(
                                 fontSize: 22.0,
                                 color: Colors.white
                             ),
                           ),
                           IconButton(
+                            onPressed: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => Setting()));
+                            },
                             icon:Icon(Icons.settings,
-
                             color: Colors.white,
                             size: 20.0,
                             )
                           ),
-
                         ]
+                      ),
+                      RaisedButton(
+                          child: Text("Edit Profile"),
+                          onPressed: (){
+                            Navigator.push(
+                              context,
+                               MaterialPageRoute(builder: (context) => EditProfile()));
+                        },
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
                       ),
                     ],
                   )
@@ -83,7 +99,6 @@ class Profile extends StatelessWidget {
             )
         )
     ]
-
     );
   }
 }
